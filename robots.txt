@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vaikunthansivakumar.github.io/thulasi-rooms/sitemap.xml
