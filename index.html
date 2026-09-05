@@ -40,7 +40,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="hero.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="hero.webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
@@ -94,8 +94,8 @@
     {
       "@type": "Accommodation",
       "name": "Fan Room",
-      "description": "Two beds in one room with a ceiling fan and a private bathroom with hot water.",
-      "bed": { "@type": "BedDetails", "numberOfBeds": 2 },
+      "description": "The largest room, with three beds, a ceiling fan and a private bathroom with hot water.",
+      "bed": { "@type": "BedDetails", "numberOfBeds": 3 },
       "amenityFeature": [
         { "@type": "LocationFeatureSpecification", "name": "Ceiling fan", "value": true },
         { "@type": "LocationFeatureSpecification", "name": "Private bathroom", "value": true },
@@ -124,7 +124,9 @@
     { "@type": "Question", "name": "Can I cook my own food?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is limited shared kitchen access for simple home cooking, and a shared table to eat at." } },
     { "@type": "Question", "name": "Is it suitable for families?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every room has two beds, so a family with children fits comfortably in one room. Tell us your group size and we will suggest the best arrangement." } }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The A/C Room has two beds and the Fan Room has three, so most families fit comfortably in one room. Tell us your group size and we will suggest the best arrangement." } },
+    { "@type": "Question", "name": "What time is check-in and check-out?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We are flexible on both. Just tell us your arrival and departure times when you message us, and we will work around them, even a late bus or an early flight." } }
   ]
 }
 </script>
@@ -512,6 +514,7 @@ body.locked{overflow:hidden;}
 .band::before{
   content:"";position:absolute;inset:0;z-index:-2;
   background:url("g-evening.jpg") center 58%/cover no-repeat;
+  background:image-set(url("g-evening.webp") type("image/webp") 1x, url("g-evening.jpg") type("image/jpeg") 1x) center 58%/cover no-repeat;
   transform:scale(1.06);filter:saturate(.85);
 }
 .band::after{
@@ -745,8 +748,11 @@ footer{border-top:1px solid var(--line);}
         </p>
       </div>
       <figure class="hero-figure rise">
-        <img src="hero.jpg" width="1600" height="1066" fetchpriority="high" decoding="async"
-             alt="Thulasi Rooms from the courtyard: a white single-storey house with a timber-roofed veranda on white columns, under a clear sky.">
+        <picture>
+          <source srcset="hero.webp" type="image/webp">
+          <img src="hero.jpg" width="1600" height="1066" fetchpriority="high" decoding="async"
+               alt="Thulasi Rooms from the courtyard: a white single-storey house with a timber-roofed veranda on white columns, under a clear sky.">
+        </picture>
         <figcaption>The house, from the courtyard</figcaption>
       </figure>
     </div>
@@ -782,23 +788,26 @@ footer{border-top:1px solid var(--line);}
     <div class="head rise">
       <p class="eyebrow">Rooms</p>
       <h2>Two ways to stay.</h2>
-      <p>Every room has two beds, its own bathroom with hot water, and a door opening straight onto the veranda. Choose air conditioning or a ceiling fan.</p>
+      <p>Every room has its own bathroom with hot water and a door opening straight onto the veranda. Choose air conditioning or the biggest room in the house.</p>
     </div>
 
     <div class="rooms rise">
       <article class="room">
         <div class="room-img">
-          <img src="room-ac.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-               alt="An air-conditioned room at Thulasi Rooms: two beds with white linen, a wall-mounted air conditioner, a coat stand and the bathroom door.">
+          <picture>
+            <source srcset="room-ac.webp" type="image/webp">
+            <img src="room-ac.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+                 alt="An air-conditioned room at Thulasi Rooms: two beds with white linen, a wall-mounted air conditioner, a coat stand and the bathroom door.">
+          </picture>
         </div>
         <div class="room-body">
           <h3>A/C Room</h3>
           <p>Air conditioning as well as the ceiling fan, for the hot months and for sleeping through the middle of the day.</p>
           <ul class="spec">
-            <li><span class="k">Sleeps</span><span class="v">Up to 4</span></li>
             <li><span class="k">Beds</span><span class="v">Two</span></li>
             <li><span class="k">Cooling</span><span class="v">A/C &amp; ceiling fan</span></li>
             <li><span class="k">Bathroom</span><span class="v">Private, hot water</span></li>
+            <li><span class="k">Check-in</span><span class="v">Flexible</span></li>
           </ul>
           <a class="link-quiet" href="https://wa.me/94768834004?text=Hi%2C%20I%27d%20like%20to%20ask%20about%20the%20A%2FC%20Room%20at%20Thulasi%20Rooms" target="_blank" rel="noopener">
             Ask about this room
@@ -809,17 +818,20 @@ footer{border-top:1px solid var(--line);}
 
       <article class="room">
         <div class="room-img">
-          <img src="room-fan.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-               alt="A fan-cooled room at Thulasi Rooms: two beds under a timber ceiling, with a tall mirror, coat stand and the bathroom door.">
+          <picture>
+            <source srcset="room-fan.webp" type="image/webp">
+            <img src="room-fan.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+                 alt="A fan-cooled room at Thulasi Rooms: two beds under a timber ceiling, with a tall mirror, coat stand and the bathroom door.">
+          </picture>
         </div>
         <div class="room-body">
           <h3>Fan Room</h3>
-          <p>The same room, cooled by the ceiling fan and the sea breeze through the window. The easier choice on your budget.</p>
+          <p>The biggest room in the house, with three beds, cooled by the ceiling fan and the sea breeze through the window. The one to ask for when there are more of you.</p>
           <ul class="spec">
-            <li><span class="k">Sleeps</span><span class="v">Up to 4</span></li>
-            <li><span class="k">Beds</span><span class="v">Two</span></li>
+            <li><span class="k">Beds</span><span class="v">Three</span></li>
             <li><span class="k">Cooling</span><span class="v">Ceiling fan</span></li>
             <li><span class="k">Bathroom</span><span class="v">Private, hot water</span></li>
+            <li><span class="k">Check-in</span><span class="v">Flexible</span></li>
           </ul>
           <a class="link-quiet" href="https://wa.me/94768834004?text=Hi%2C%20I%27d%20like%20to%20ask%20about%20the%20Fan%20Room%20at%20Thulasi%20Rooms" target="_blank" rel="noopener">
             Ask about this room
@@ -846,24 +858,24 @@ footer{border-top:1px solid var(--line);}
       <p>The veranda, the kitchen, the rooms and the bathroom &mdash; photographed as they are, on an ordinary morning.</p>
     </div>
     <div class="gallery rise">
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the shared veranda"><img src="g-veranda.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="The shared veranda at Thulasi Rooms: red tiled floor, two guest room doors, a long counter and a dining table with chairs."></button><figcaption>The shared veranda</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: outside your door"><img src="g-door.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Two cane-backed chairs on the red tiled veranda beside the polished wooden door of room 02."></button><figcaption>Outside your door</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the kitchen counter"><img src="g-kitchen.jpg" width="1200" height="1600" loading="lazy" decoding="async"
-        alt="The outdoor kitchen counter guests are welcome to use: a grey concrete worktop with three wooden-topped stools, on the red-tiled veranda."></button><figcaption>The kitchen counter, yours to use</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: private bathroom"><img src="g-bathroom.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="A private bathroom at Thulasi Rooms: grey tiled walls, an overhead rain shower, a toilet and a blue-framed window."></button><figcaption>Private bathroom, hot water</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: room with the door open"><img src="g-desk.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="A guest room with a dressing table and mirror by the curtained window, and the door open onto the sunlit veranda."></button><figcaption>Room with the door open</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: made up for arrival"><img src="g-beds.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Two freshly made beds with white linen side by side against a white wall."></button><figcaption>Made up for arrival</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: round table for meals"><img src="g-dining.jpg" width="1200" height="1600" loading="lazy" decoding="async"
-        alt="A round dining table and four chairs on the veranda, with the garden gate reflected in the window behind."></button><figcaption>Round table for meals</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the house from the garden"><img src="g-exterior.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="The house seen from the front garden, framed by areca palms, with its red roof and open veranda."></button><figcaption>The house from the garden</figcaption></figure>
-      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: late sun on the veranda"><img src="g-evening.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Late sun breaking across the veranda roof beams and the red tiled floor at Thulasi Rooms."></button><figcaption>Late sun on the veranda</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the shared veranda"><picture><source srcset="g-veranda.webp" type="image/webp"><img src="g-veranda.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="The shared veranda at Thulasi Rooms: red tiled floor, two guest room doors, a long counter and a dining table with chairs."></picture></button><figcaption>The shared veranda</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: outside your door"><picture><source srcset="g-door.webp" type="image/webp"><img src="g-door.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Two cane-backed chairs on the red tiled veranda beside the polished wooden door of room 02."></picture></button><figcaption>Outside your door</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the kitchen counter"><picture><source srcset="g-kitchen.webp" type="image/webp"><img src="g-kitchen.jpg" width="1200" height="1600" loading="lazy" decoding="async"
+        alt="The outdoor kitchen counter guests are welcome to use: a grey concrete worktop with three wooden-topped stools, on the red-tiled veranda."></picture></button><figcaption>The kitchen counter, yours to use</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: private bathroom"><picture><source srcset="g-bathroom.webp" type="image/webp"><img src="g-bathroom.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="A private bathroom at Thulasi Rooms: grey tiled walls, an overhead rain shower, a toilet and a blue-framed window."></picture></button><figcaption>Private bathroom, hot water</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: room with the door open"><picture><source srcset="g-desk.webp" type="image/webp"><img src="g-desk.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="A guest room with a dressing table and mirror by the curtained window, and the door open onto the sunlit veranda."></picture></button><figcaption>Room with the door open</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: made up for arrival"><picture><source srcset="g-beds.webp" type="image/webp"><img src="g-beds.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Two freshly made beds with white linen side by side against a white wall."></picture></button><figcaption>Made up for arrival</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: round table for meals"><picture><source srcset="g-dining.webp" type="image/webp"><img src="g-dining.jpg" width="1200" height="1600" loading="lazy" decoding="async"
+        alt="A round dining table and four chairs on the veranda, with the garden gate reflected in the window behind."></picture></button><figcaption>Round table for meals</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the house from the garden"><picture><source srcset="g-exterior.webp" type="image/webp"><img src="g-exterior.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="The house seen from the front garden, framed by areca palms, with its red roof and open veranda."></picture></button><figcaption>The house from the garden</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: late sun on the veranda"><picture><source srcset="g-evening.webp" type="image/webp"><img src="g-evening.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Late sun breaking across the veranda roof beams and the red tiled floor at Thulasi Rooms."></picture></button><figcaption>Late sun on the veranda</figcaption></figure>
     </div>
   </section>
 
@@ -925,6 +937,11 @@ footer{border-top:1px solid var(--line);}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10M2 20h20M8 8V5h8v3"/></svg>
         <h3>Veranda seating</h3>
         <p>Stone benches and chairs under the veranda roof &mdash; the best seat in the house at dusk.</p>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        <h3>Flexible check-in</h3>
+        <p>Tell us your arrival time and we will be there, however late the bus gets in.</p>
       </div>
     </div>
   </section>
@@ -1054,7 +1071,11 @@ footer{border-top:1px solid var(--line);}
       </details>
       <details>
         <summary>Is it suitable for families?</summary>
-        <div class="answer"><p>Yes. Every room has two beds, so a family with children fits comfortably in one room. Tell us your group size and we will suggest the best arrangement.</p></div>
+        <div class="answer"><p>Yes. The A/C Room has two beds and the Fan Room has three, so most families fit comfortably in one room. Tell us your group size and we will suggest the best arrangement.</p></div>
+      </details>
+      <details>
+        <summary>What time is check-in and check-out?</summary>
+        <div class="answer"><p>We are flexible on both. Just tell us your arrival and departure times when you message us, and we will work around them &mdash; even a late bus or an early flight.</p></div>
       </details>
     </div>
   </section>
@@ -1224,7 +1245,7 @@ footer{border-top:1px solid var(--line);}
       var fig = btn.closest('figure');
       var cap = fig ? fig.querySelector('figcaption') : null;
       return {
-        src: img.getAttribute('src'),
+        img: img, // read live — lazy images resolve currentSrc after page load
         alt: img.getAttribute('alt'),
         caption: cap ? cap.textContent : ''
       };
@@ -1237,7 +1258,7 @@ footer{border-top:1px solid var(--line);}
 
     function render(){
       var it = items[current];
-      lbImg.src = it.src;
+      lbImg.src = it.img.currentSrc || it.img.src;
       lbImg.alt = it.alt;
       lbCaption.textContent = it.caption;
       lbCount.textContent = (current + 1) + ' of ' + items.length;
