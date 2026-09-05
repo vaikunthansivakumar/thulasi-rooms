@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2C3B31" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14120F" media="(prefers-color-scheme: dark)">
 <meta name="format-detection" content="telephone=no">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232C3B31'/%3E%3Cpath d='M16 25c-4.6-1.5-8-5.6-8-11 0-3.4 2.4-6 6.4-6.8C19.8 6 24 9 24.6 13.2 25.5 18.6 21 23.4 16 25z' fill='none' stroke='%23FBF8F3' stroke-width='1.7' stroke-linejoin='round'/%3E%3Cpath d='M11.5 17.5c4-1 6.8-4 7.8-8.6' fill='none' stroke='%23FBF8F3' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232C3B31'/%3E%3Csvg x='4' y='5.4' width='24' height='21.2' viewBox='0 8 100 88.5'%3E%3Cg fill='none' stroke='%23FBF8F3' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13,43 L50,13 L87,43'/%3E%3Cpath d='M6,46.5 H94'/%3E%3C/g%3E%3Cg fill='%23FBF8F3'%3E%3Cpath d='M21.5,51.5 L31.5,51.5 L32.5,88 L20.5,88 Z'/%3E%3Cpath d='M68.5,51.5 L78.5,51.5 L79.5,88 L67.5,88 Z'/%3E%3C/g%3E%3Cpath d='M13,90.5 H87' fill='none' stroke='%23FBF8F3' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M50,88 C50,84 50,79 50,74' fill='none' stroke='%23FBF8F3' stroke-width='4.5' stroke-linecap='round'/%3E%3Cg fill='%23FBF8F3'%3E%3Cg transform='translate(50,85.5) scale(0.44)'%3E%3Cpath d='M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z'/%3E%3C/g%3E%3Cg transform='translate(50,85.5) scale(-0.44,0.44)'%3E%3Cpath d='M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="hero.jpg">
 
 <link rel="canonical" href="https://vaikunthansivakumar.github.io/thulasi-rooms/">
@@ -279,7 +279,7 @@ header.is-stuck{
   font-family:"Fraunces",Georgia,serif;font-variation-settings:"opsz" 40;
   font-size:1.12rem;font-weight:500;letter-spacing:.005em;color:var(--ink);
 }
-.mark svg{width:1.15rem;height:1.15rem;color:var(--forest);flex:none;}
+.mark svg{width:1.3rem;height:1.15rem;color:var(--forest);flex:none;}
 .nav-links{display:flex;align-items:center;gap:2.1rem;}
 .nav-links a{
   font-size:.88rem;font-weight:500;color:var(--ink-2);text-decoration:none;
@@ -425,13 +425,62 @@ body.locked{overflow:hidden;}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.85rem,1.6vw,1.4rem);}
 @media (max-width:820px){.gallery{grid-template-columns:1fr 1fr;}}
 @media (max-width:520px){.gallery{grid-template-columns:1fr;}}
-.gallery figure{margin:0;}
-.gallery img{
+.gallery-item{margin:0;}
+.gallery-btn{
+  all:unset;display:block;width:100%;cursor:zoom-in;border-radius:var(--radius-lg);
+}
+.gallery-btn img{
   width:100%;aspect-ratio:4/3;object-fit:cover;
   border-radius:var(--radius-lg);border:1px solid var(--line);background:var(--paper-3);
+  transition:transform .5s var(--ease);
 }
+.gallery-btn:hover img{transform:scale(1.02);}
+.gallery-btn:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:var(--radius-lg);}
 .gallery figcaption{
   margin-top:.6rem;font-size:.8rem;color:var(--ink-3);letter-spacing:.01em;
+}
+
+/* ═══════════════ LIGHTBOX ═══════════════ */
+.lightbox{
+  position:fixed;inset:0;z-index:95;display:none;
+  align-items:center;justify-content:center;
+  background:var(--forest-solid);
+  background:color-mix(in srgb,var(--forest-solid) 92%,transparent);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  padding:clamp(1rem,4vw,2.5rem);
+}
+.lightbox.open{display:flex;}
+.lightbox-stage{
+  display:flex;flex-direction:column;align-items:center;
+  max-width:min(94vw,1100px);width:100%;
+}
+@media (prefers-reduced-motion:no-preference){
+  .lightbox-stage{opacity:0;transform:translateY(6px);transition:opacity .25s var(--ease),transform .25s var(--ease);}
+  .lightbox.open .lightbox-stage{opacity:1;transform:none;}
+}
+.lightbox-bar{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:.85rem;}
+.lightbox-count{color:var(--on-dark-3);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;}
+.lightbox-frame{position:relative;display:flex;align-items:center;justify-content:center;width:100%;min-width:0;}
+.lightbox-frame img{
+  max-width:100%;max-height:72vh;width:auto;height:auto;
+  border-radius:var(--radius);object-fit:contain;
+}
+.lightbox-caption{margin-top:1rem;color:var(--on-dark-2);font-size:.9rem;text-align:center;max-width:60ch;}
+.lightbox-close,.lightbox-nav{
+  background:transparent;border:1px solid rgba(244,237,226,.35);border-radius:999px;
+  color:var(--on-dark);cursor:pointer;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  width:2.5rem;height:2.5rem;padding:0;
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.lightbox-close:hover,.lightbox-nav:hover{border-color:var(--on-dark);background:rgba(244,237,226,.1);}
+.lightbox-nav svg,.lightbox-close svg{width:1.15rem;height:1.15rem;}
+.lightbox-prev{position:absolute;left:.5rem;}
+.lightbox-next{position:absolute;right:.5rem;}
+@media (max-width:640px){
+  .lightbox-prev{left:0;}
+  .lightbox-next{right:0;}
+  .lightbox-frame img{max-height:62vh;}
 }
 
 /* ═══════════════ AMENITIES ═══════════════ */
@@ -621,7 +670,17 @@ footer{border-top:1px solid var(--line);}
 <header id="hdr">
   <div class="wrap nav">
     <a class="mark" href="#top" aria-label="Thulasi Rooms, home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-4-1-8-5-8-11 0-3 2-6 6-7 5-1 9 2 10 6 1 5-3 10-8 12z"/><path d="M6 13c4-1 7-4 8-9"/></svg>
+      <svg viewBox="0 8 100 88.5" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14,44 L50,15 L86,44"/><path d="M7,46.8 H93"/></g>
+        <g fill="currentColor"><path d="M23.2,49.5 L31.2,49.5 L32.2,88 L22.2,88 Z"/><path d="M68.8,49.5 L76.8,49.5 L77.8,88 L67.8,88 Z"/></g>
+        <path d="M15,90 H85" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        <path d="M50,88 C50,83 50,77 50,70" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+        <g fill="currentColor">
+          <g transform="translate(50,80.5) scale(0.42)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+          <g transform="translate(50,80.5) scale(-0.42,0.42)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+          <g transform="translate(50,71) rotate(-41) scale(0.32)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+        </g>
+      </svg>
       Thulasi Rooms
     </a>
     <nav class="nav-links" aria-label="Primary">
@@ -774,30 +833,61 @@ footer{border-top:1px solid var(--line);}
   </section>
 
   <!-- ───────── GALLERY ─────────
-       ★ EDIT 3 — to add or swap a photo, change a file name below and
-       upload the new picture with the same name. Keep the alt="..."
-       text accurate: it is what blind visitors and Google read. -->
+       ★ EDIT 3 — to add, remove or swap a photo: duplicate one of the
+       <figure> blocks below (or delete one), point src at your file,
+       keep width/height matching the actual image, and write an
+       accurate caption + alt text — it's what blind visitors and
+       Google read. The lightbox below rebuilds itself from these
+       figures automatically; you never need to touch the script. -->
   <section class="wrap section" id="gallery" style="padding-top:0;">
     <div class="head rise">
       <p class="eyebrow">Gallery</p>
       <h2>A look around.</h2>
-      <p>The veranda, the rooms and the bathroom &mdash; photographed as they are, on an ordinary morning.</p>
+      <p>The veranda, the kitchen, the rooms and the bathroom &mdash; photographed as they are, on an ordinary morning.</p>
     </div>
     <div class="gallery rise">
-      <figure><img src="g-veranda.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="The shared veranda at Thulasi Rooms: red tiled floor, two guest room doors, a long counter and a dining table with chairs."><figcaption>The shared veranda</figcaption></figure>
-      <figure><img src="g-door.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Two cane-backed chairs on the red tiled veranda beside the polished wooden door of room 02."><figcaption>Outside your door</figcaption></figure>
-      <figure><img src="g-bathroom.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="A private bathroom at Thulasi Rooms: grey tiled walls, an overhead rain shower, a toilet and a blue-framed window."><figcaption>Private bathroom, hot water</figcaption></figure>
-      <figure><img src="g-desk.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="A guest room with a dressing table and mirror by the curtained window, and the door open onto the sunlit veranda."><figcaption>Room with the door open</figcaption></figure>
-      <figure><img src="g-beds.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Two freshly made beds with white linen side by side against a white wall."><figcaption>Made up for arrival</figcaption></figure>
-      <figure><img src="g-evening.jpg" width="1400" height="1050" loading="lazy" decoding="async"
-        alt="Late sun breaking across the veranda roof beams and the red tiled floor at Thulasi Rooms."><figcaption>Late sun on the veranda</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the shared veranda"><img src="g-veranda.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="The shared veranda at Thulasi Rooms: red tiled floor, two guest room doors, a long counter and a dining table with chairs."></button><figcaption>The shared veranda</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: outside your door"><img src="g-door.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Two cane-backed chairs on the red tiled veranda beside the polished wooden door of room 02."></button><figcaption>Outside your door</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the kitchen counter"><img src="g-kitchen.jpg" width="1200" height="1600" loading="lazy" decoding="async"
+        alt="The outdoor kitchen counter guests are welcome to use: a grey concrete worktop with three wooden-topped stools, on the red-tiled veranda."></button><figcaption>The kitchen counter, yours to use</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: private bathroom"><img src="g-bathroom.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="A private bathroom at Thulasi Rooms: grey tiled walls, an overhead rain shower, a toilet and a blue-framed window."></button><figcaption>Private bathroom, hot water</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: room with the door open"><img src="g-desk.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="A guest room with a dressing table and mirror by the curtained window, and the door open onto the sunlit veranda."></button><figcaption>Room with the door open</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: made up for arrival"><img src="g-beds.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Two freshly made beds with white linen side by side against a white wall."></button><figcaption>Made up for arrival</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: round table for meals"><img src="g-dining.jpg" width="1200" height="1600" loading="lazy" decoding="async"
+        alt="A round dining table and four chairs on the veranda, with the garden gate reflected in the window behind."></button><figcaption>Round table for meals</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: the house from the garden"><img src="g-exterior.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="The house seen from the front garden, framed by areca palms, with its red roof and open veranda."></button><figcaption>The house from the garden</figcaption></figure>
+      <figure class="gallery-item"><button class="gallery-btn" aria-label="Open larger photo: late sun on the veranda"><img src="g-evening.jpg" width="1400" height="1050" loading="lazy" decoding="async"
+        alt="Late sun breaking across the veranda roof beams and the red tiled floor at Thulasi Rooms."></button><figcaption>Late sun on the veranda</figcaption></figure>
     </div>
   </section>
+
+  <!-- Lightbox: opened by clicking any photo above. Built once, reused for all photos. -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <div class="lightbox-stage">
+      <div class="lightbox-bar">
+        <span class="lightbox-count" id="lbCount"></span>
+        <button class="lightbox-close" id="lbClose" type="button" aria-label="Close photo viewer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="lightbox-frame">
+        <button class="lightbox-nav lightbox-prev" id="lbPrev" type="button" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <img id="lbImg" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lbNext" type="button" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="lightbox-caption" id="lbCaption"></p>
+    </div>
+  </div>
 
   <!-- ───────── THE STAY / AMENITIES ───────── -->
   <section class="wrap section" id="stay" style="padding-top:0;">
@@ -1012,7 +1102,17 @@ footer{border-top:1px solid var(--line);}
 <footer>
   <div class="wrap foot">
     <a class="mark" href="#top">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-4-1-8-5-8-11 0-3 2-6 6-7 5-1 9 2 10 6 1 5-3 10-8 12z"/><path d="M6 13c4-1 7-4 8-9"/></svg>
+      <svg viewBox="0 8 100 88.5" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14,44 L50,15 L86,44"/><path d="M7,46.8 H93"/></g>
+        <g fill="currentColor"><path d="M23.2,49.5 L31.2,49.5 L32.2,88 L22.2,88 Z"/><path d="M68.8,49.5 L76.8,49.5 L77.8,88 L67.8,88 Z"/></g>
+        <path d="M15,90 H85" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        <path d="M50,88 C50,83 50,77 50,70" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>
+        <g fill="currentColor">
+          <g transform="translate(50,80.5) scale(0.42)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+          <g transform="translate(50,80.5) scale(-0.42,0.42)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+          <g transform="translate(50,71) rotate(-41) scale(0.32)"><path d="M0,0 C3,-17 14,-33 34,-39 C32,-19 19,-4 0,0 Z"/></g>
+        </g>
+      </svg>
       Thulasi Rooms
     </a>
     <nav class="foot-links" aria-label="Footer">
@@ -1103,6 +1203,97 @@ footer{border-top:1px solid var(--line);}
     Array.prototype.forEach.call(targets, function(el){ obs.observe(el); });
   } else {
     Array.prototype.forEach.call(targets, function(el){ el.classList.add('in'); });
+  }
+
+  /* Gallery lightbox — built from the <figure> markup in the gallery
+     section, so adding/removing/swapping a photo there needs no
+     changes here. */
+  var galleryButtons = Array.prototype.slice.call(document.querySelectorAll('.gallery-btn'));
+  if (galleryButtons.length) {
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lbImg');
+    var lbCaption = document.getElementById('lbCaption');
+    var lbCount = document.getElementById('lbCount');
+    var lbClose = document.getElementById('lbClose');
+    var lbPrev = document.getElementById('lbPrev');
+    var lbNext = document.getElementById('lbNext');
+    var lbFrame = document.querySelector('.lightbox-frame');
+
+    var items = galleryButtons.map(function(btn){
+      var img = btn.querySelector('img');
+      var fig = btn.closest('figure');
+      var cap = fig ? fig.querySelector('figcaption') : null;
+      return {
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt'),
+        caption: cap ? cap.textContent : ''
+      };
+    });
+
+    var current = 0;
+    var lastTrigger = null;
+
+    function isOpen(){ return lb.classList.contains('open'); }
+
+    function render(){
+      var it = items[current];
+      lbImg.src = it.src;
+      lbImg.alt = it.alt;
+      lbCaption.textContent = it.caption;
+      lbCount.textContent = (current + 1) + ' of ' + items.length;
+    }
+
+    function openLB(idx, trigger){
+      current = idx;
+      lastTrigger = trigger || document.activeElement;
+      render();
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      lbClose.focus();
+    }
+
+    function closeLB(){
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      if (lastTrigger) lastTrigger.focus();
+    }
+
+    function show(delta){
+      current = (current + delta + items.length) % items.length;
+      render();
+    }
+
+    galleryButtons.forEach(function(btn, idx){
+      btn.addEventListener('click', function(){ openLB(idx, btn); });
+    });
+    lbClose.addEventListener('click', closeLB);
+    lbPrev.addEventListener('click', function(){ show(-1); });
+    lbNext.addEventListener('click', function(){ show(1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb) closeLB(); });
+
+    document.addEventListener('keydown', function(e){
+      if (!isOpen()) return;
+      if (e.key === 'Escape'){ closeLB(); return; }
+      if (e.key === 'ArrowLeft'){ show(-1); return; }
+      if (e.key === 'ArrowRight'){ show(1); return; }
+      if (e.key !== 'Tab') return;
+      var focusable = lb.querySelectorAll('button');
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+
+    /* Swipe left/right to move between photos on touch devices */
+    var touchX = null;
+    lbFrame.addEventListener('touchstart', function(e){ touchX = e.changedTouches[0].clientX; }, {passive:true});
+    lbFrame.addEventListener('touchend', function(e){
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40){ show(dx > 0 ? -1 : 1); }
+      touchX = null;
+    }, {passive:true});
   }
 })();
 </script>
